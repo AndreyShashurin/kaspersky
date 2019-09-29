@@ -1,0 +1,26 @@
+.FormControlFile {
+    input {
+         display:none;
+    }
+    img {
+        max-width: 200px;
+        max-height: 200px;
+        min-height: 200px;
+    }
+    .uploadButton {
+        background: white;
+        padding: 7px;
+        color: #7d7d7d;
+        font-size: 0.8rem;
+        border: solid 2px #7d7d7d;
+        font-weight: bold;
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background: #7d7d7d;
+            color: white;
+        }
+    }
+ }

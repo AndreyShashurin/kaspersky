@@ -1,0 +1,47 @@
+<form [formGroup]="addForm" (ngSubmit)="update(book[0].id)">   
+    <div class="form-group FormControlFile">        
+        <div class="mb-2">
+            <input (change)="onChange($event)" class="form-control-file" type="file" name="uploadFile" id="FormControlFile">
+            <img *ngIf="patch || book[0].picture"src="{{patch ? patch : book[0].picture}}" alt="logoBook" id="imgPicture">
+        </div>
+        <label for="FormControlFile" class="uploadButton">{{message}} фотографию</label>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="name"><strong>Название</strong></label>
+            <input type="text" class="form-control" formControlName="name">
+        </div>
+    </div> 
+    <div class="form-row card mb-3 p-2" formGroupName="authors">
+        <label><strong>Автор</strong></label>
+          <div class="card m-2" *ngFor="let author of book[0].authors; let i = index; trackBy:trackByFn">
+            <div [formGroupName]="i">
+                <div class="col-md-12 mb-2 ml-1">
+                    <label>Имя</label>
+                    <input type="text" class="form-control" value="{{author.name}}">
+                </div>
+                <div class="col-md-12 mb-2 ml-1">
+                    <label>Фамилия</label>
+                    <input type="text" class="form-control" value="{{author.surname}}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="year"><strong>Год</strong></label>
+            <input type="text" class="form-control" id="year" formControlName="year">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="isbn"><strong>ISBN</strong></label>
+            <input type="text" class="form-control" id="isbn" formControlName="isbn">
+            <div class="alert alert-danger"*ngIf="addForm.controls['isbn'].invalid">
+                Некорректный ISBN
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary btn-sm mr-3" type="submit" [disabled]="addForm.invalid">Изменить</button>
+    <a [routerLink]="['/']"  class="btn btn-secondary btn-sm">Назад</a>
+</form>

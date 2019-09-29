@@ -1,0 +1,32 @@
+<a [routerLink]="['add/']" class="add-new btn btn-primary btn-sm">Создать новую книгу</a>
+<table class="table table-hover mt-3">
+  <thead>
+    <tr>
+      <th scope="col" class="cursor-pointer" width="500px" (click)="sortName(paramName)">Заголовок</th>
+      <th scope="col">Авторы</th>
+      <th scope="col" class="cursor-pointer" (click)="sortYear(paramYear)">Год публикации</th>
+      <th scope="col">ISBN</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of arraylocalStorage">
+      <th>
+        <img *ngIf="book.picture" src="{{book.picture}}">
+        <span class="bookName">{{book.name | slice:0:30}}</span>
+      </th>
+      <td>
+          <div *ngFor="let authors of book.authors">
+            <span>{{authors.name}} {{authors.surname}}</span>
+          </div>
+      </td>
+      <td>{{book.year}}</td>
+      <td>{{book.isbn}}</td>
+      <td>
+        <a [routerLink]="['update/', book.id ]" class="btn btn-outline-success btn-sm m-1">Редактировать</a>
+        <a [routerLink]="['detail/', book.id ]" class="btn btn-outline-primary btn-sm m-1">Просмотр</a>
+        <a (click)="delete(book)" class="btn btn-outline-danger btn-sm m-1">Удалить</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
